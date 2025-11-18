@@ -16,7 +16,7 @@ The authors have also created a custom PCB (left in the image below) for the VL5
 
 <img src="media/board_comparison.jpg" alt="Board Comparison" width="500">
 
-## Connections
+## (Old) Breadboard Wiring Guide
 Make the following connections between the F411 and VL53L8CH breakout board:
 ```
 EXT_5V          <-> 5V
@@ -37,6 +37,36 @@ GND             <-> GND
 
 For convenience, wee below for the pinout of the SATEL-VL53L8 board, taken from the datasheet.
 <img src="media/VL53L8_satel_pinout.png" alt="VL53L8-SATEL Pinout" width="300">
+
+## Dedicated PCB Setup (Updated Hardware Information (After April 2025))
+
+The VL53L8CH sensor and Blackpill F411 now have a dedicated PCB, which replaces the breadboard-style wiring shown earlier. We also have dedicated mounts for the PCB, sensor, and associated wiring which can be easily mounted on various robots, such as the end-effector of a UR5.
+
+- **Old vs. new PCB**
+  - The original custom PCB and wiring approach are shown here:
+  
+    <img src="media/old_pcb_setup.jpg" alt="Old PCB Setup" width="500">
+
+  - The current recommended dedicated PCB and wiring are shown here:
+  
+    <img src="media/new_pcb_setup.jpg" alt="New PCB Setup" width="500">
+
+- **Blackpill orientation on the dedicated PCB**
+  - **The Blackpill must be oriented correctly** when it is plugged into the dedicated PCB.
+  - **J4 connector**: The `J4` connector on the PCB **must face away from the main board** (toward the outside edge), matching the orientation in `media/new_pcb_setup.jpg`.
+  - **J3 header/pins**: The pins on the `J3` header must match the picture in `media/new_pcb_setup.jpg`. Double-check that each signal (e.g., `3V3`, `GND`, `SWDIO`, `SWCLK`, `TX`, `RX`) lines up with the labels on both the Blackpill and PCB silkscreen.
+
+- **Connections to the ST-LINK USB stick**
+  - The pins exiting the Blackpill are connected to the blue ST-LINK USB stick for **power and data transfer**. Match the pins based on the labels on both boards (e.g., `SWDIO`, `SWCLK`, `GND`, `3V3`, and any UART pins if used).
+  - If the ST-LINK USB stick is **bricked**, it will still provide **power and data (USB-UART)** but **cannot be used to flash** the Blackpill firmware.
+
+- **Using an STM32 Nucleo board when the ST-LINK stick cannot flash**
+  - An STM32 Nucleo-64 board has a **built-in ST-LINK flasher/debugger** that can be used as a replacement to flash the Blackpill.
+  - In this case, follow **Section 7.4.5** and **Table 5** of the ST Nucleo-64 user manual (`UM1724`) for the exact pin connections between the Nucleo’s ST-LINK interface and the Blackpill, and for detailed flashing instructions:
+    - [UM1724: STM32 Nucleo-64 boards (MB1136) user manual](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
+  - Use these instructions **together with** the flashing steps described earlier in this README (see **"Flashing the Microcontroller"**) to build the `.BIN` firmware and flash it to the Blackpill via the Nucleo’s built-in ST-LINK.
+
+
 
 # Software Setup
 
