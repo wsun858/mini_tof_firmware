@@ -61,7 +61,10 @@ The VL53L8CH sensor and Blackpill F411 now have a dedicated PCB, which replaces 
   - If the ST-LINK USB stick is **bricked**, it will still provide **power and data (USB-UART)** but **cannot be used to flash** the Blackpill firmware.
 
 - **Using an STM32 Nucleo board when the ST-LINK stick cannot flash**
-  - An STM32 Nucleo-64 board has a **built-in ST-LINK flasher/debugger** that can be used as a replacement to flash the Blackpill.
+  - An STM32 Nucleo-64 board has a **built-in ST-LINK flasher/debugger** that can be used as a replacement to flash the Blackpill (see the example Nucleo board below).
+  
+    <img src="media/stmnucleo32.jpg" alt="STM32 Nucleo-64 Board" width="400">
+
   - In this case, follow **Section 7.4.5** and **Table 5** of the ST Nucleo-64 user manual (`UM1724`) for the exact pin connections between the Nucleo’s ST-LINK interface and the Blackpill, and for detailed flashing instructions:
     - [UM1724: STM32 Nucleo-64 boards (MB1136) user manual](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
   - Use these instructions **together with** the flashing steps described earlier in this README (see **"Flashing the Microcontroller"**) to build the `.BIN` firmware and flash it to the Blackpill via the Nucleo’s built-in ST-LINK.
